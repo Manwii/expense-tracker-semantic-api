@@ -10,6 +10,10 @@ app = FastAPI()
 
 nlp = spacy.load('en_core_web_sm')
 
+@app.get("/")
+def index():
+    return {"Index": "page"}
+
 @app.post("/analyse_sms/")
 def analyse_sms(message: Message):
     message_body = message.message_body
