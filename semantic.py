@@ -1,4 +1,5 @@
 import spacy
+import re
 from spacy import displacy
 from spacy.matcher import Matcher
 
@@ -110,12 +111,13 @@ complete_filtered_tokens = [preprocess_token(token) for token in message_doc if 
 
 # to extract phone number
 def extract_amount(nlp_doc):
-    pattern = [[{'POS': 'NUM'}]]
-    matcher.add('Amount', pattern)
-    matches = matcher(nlp_doc)
-    for match_id, start, end in matches:
-        span = nlp_doc[start:end]
-        return span.text
+    # pattern = [[{'POS': 'NUM'}]]
+    pattern = r"NPR \b\d+,?\.?\d+\b.\d+"
+    ext_val = re.search(pattern, str(nlp_doc))
+    amount_value = None
+    if ext_val:
+        amount_value = ext_val.group()
+    return amount_value
 
 
 # Amount = extract_amount(message_doc)
