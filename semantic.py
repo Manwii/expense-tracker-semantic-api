@@ -116,7 +116,8 @@ def extract_amount(nlp_doc):
     ext_val = re.search(pattern, str(nlp_doc))
     amount_value = None
     if ext_val:
-        amount_value = ext_val.group()
+        amount_value_npr = ext_val.group()
+        amount_value= amount_value_npr.split(" ")[1]
     return amount_value
 
 
