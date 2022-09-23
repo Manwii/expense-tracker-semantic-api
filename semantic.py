@@ -112,7 +112,7 @@ complete_filtered_tokens = [preprocess_token(token) for token in message_doc if 
 # to extract phone number
 def extract_amount(nlp_doc):
     # pattern = [[{'POS': 'NUM'}]]
-    pattern = r"NPR \b\d+,?\.?\d+\b.\d+"
+    pattern = r"NPR \b\d+,?\.?\d+(\b.\d+)?"
     ext_val = re.search(pattern, str(nlp_doc))
     amount_value = None
     if ext_val:
